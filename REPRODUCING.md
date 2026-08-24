@@ -7,8 +7,10 @@ data each constant was selected on.
 
 ## Which mode reproduces which numbers
 
-- **Base UNILID rows**: load with `calibrated=False` (or use a version-1
-  `.unilid` file). `eval.py` always scores in base mode and refuses a version-2
+- **Base UNILID rows**: load with `calibrated=False`, or use a version-1
+  `.unilid` file: the HuggingFace Hub repository publishes one as
+  `unilid-1940.unilid`, whose weights are identical to those in the version-2
+  file. `eval.py` always scores in base mode and refuses a version-2
   (calibrated) model file unless `--base` is passed, so base numbers cannot be
   produced from a calibrated file by accident.
 - **Calibrated UNILID rows**: the default (`load_model(path)` on the version-2

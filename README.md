@@ -71,11 +71,15 @@ binary and the `sentencepiece` package are present, which needs the build in
 | Model | Languages | Training Data | Calibration | Download |
 |-------|-----------|---------------|-------------|----------|
 | unilid-1940-calibrated | 1940 language-script combinations | 60M samples | bundled (version-2 file) | [HuggingFace Hub](https://huggingface.co/cmeister/unilid-1940) |
+| unilid-1940 | 1940 language-script combinations | 60M samples | none (version-1 file) | [HuggingFace Hub](https://huggingface.co/cmeister/unilid-1940) |
 
-The file bundles the calibration artifact (161 KB), which the same repository
-also offers on its own as `calibration.json`. The stored weights are the base
-ones either way, so this one download serves both modes: pass
-`calibrated=False` for base inference. The file is 780 MB; loading builds the
+The two files store the same weights and differ only in the container. The
+calibrated file bundles the calibration artifact (161 KB), which the same
+repository also offers on its own as `calibration.json`. The stored weights are
+the base ones either way, so that one download serves both modes: pass
+`calibrated=False` for base inference. `unilid-1940.unilid` is the version-1
+file, for base inference without the bundled calibration and for supplying a
+calibration artifact of your own. Either file is 780 MB; loading builds the
 float32 weight matrix in memory, so plan for roughly 2 to 3 GB of free RAM.
 
 ```bash
@@ -84,6 +88,8 @@ python -c "from huggingface_hub import hf_hub_download; \
   print(hf_hub_download('cmeister/unilid-1940', 'unilid-1940-calibrated.unilid', local_dir='.'))"
 # or directly:
 # wget https://huggingface.co/cmeister/unilid-1940/resolve/main/unilid-1940-calibrated.unilid
+# the version-1 file, with no bundled calibration:
+# wget https://huggingface.co/cmeister/unilid-1940/resolve/main/unilid-1940.unilid
 ```
 
 ## Predict
